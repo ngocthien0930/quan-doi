@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timeline Lịch sử Tổng cục Hậu cần - Kỹ thuật</title>
+    <style>
+        :root {
+            --army-dark: #1b3014;
+            --army-green: #2d4d22;
+            --gold: #d4af37;
+            --white: #ffffff;
+            --bg: #f0f2f0;
+            --red-medal: #c0392b;
+        }
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 0; color: #333; }
+
+        /* Tiêu đề */
+        .header { background: var(--army-dark); color: var(--gold); padding: 30px 20px; text-align: center; border-bottom: 4px solid var(--gold); }
+        .header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Timeline chính */
+        .timeline { position: relative; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--army-green); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
+
+        .container { padding: 10px 40px; position: relative; width: 50%; cursor: pointer; }
+        .container::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: var(--white); border: 4px solid var(--gold); top: 15px; border-radius: 50%; z-index: 1; }
+        .left { left: 0; text-align: right; }
+        .right { left: 50%; text-align: left; }
+        .right::after { left: -10px; }
+
+        .content { padding: 15px 20px; background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; border-bottom: 4px solid var(--gold); }
+        .container:hover .content { transform: translateY(-5px); }
+        .content h2 { margin: 0; color: var(--army-green); font-size: 1.1rem; }
+        .content .year { display: inline-block; background: var(--army-green); color: var(--gold); padding: 2px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
+
+        /* Modal Popup */
+        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: var(--white); width: 100%; max-width: 500px; border-radius: 15px; position: relative; overflow: hidden; border-top: 10px solid var(--army-green); animation: popIn 0.3s ease; }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .close { position: absolute; top: 10px; right: 15px; font-size: 24px; color: #999; cursor: pointer; z-index: 2; }
+        .modal-inner { padding: 25px; max-height: 80vh; overflow-y: auto; }
+        .modal-inner h3 { color: var(--army-green); border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-top: 0; }
+        
+        .data-point { background: #f4f6f4; border-left: 4px solid var(--gold); padding: 12px; margin: 15px 0; font-size: 0.9rem; border-radius: 0 6px 6px 0; }
+        .data-point b { color: var(--army-dark); display: block; margin-bottom: 4px; border-bottom: 1px dashed #ccc; }
+        .highlight { color: var(--red-medal); font-weight: bold; }
+
+        /* Phần thưởng */
+        .awards-section { max-width: 800px; margin: 20px auto 50px; padding: 20px; background: var(--white); border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .awards-title { text-align: center; color: var(--army-dark); border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; font-size: 1.1rem; }
+        .award-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
+        .award-item { display: flex; align-items: center; background: #fdfbf2; padding: 10px; border-radius: 8px; border-left: 4px solid var(--red-medal); font-size: 0.85rem; }
+
+        @media screen and (max-width: 600px) {
+            .timeline::after { left: 31px; }
+            .container { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
+            .container::after { left: 21px; right: auto; }
+            .right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Lịch sử & Truyền thống<br>Tổng cục Hậu cần - Kỹ thuật</h1>
+    </div>
+
+    <div class="timeline">
+        <div class="container left" onclick="openModal(1)">
+            <div class="content"><span class="year">1945 - 1954</span><h2>Kháng chiến chống Pháp</h2><p>Thành lập Tổng cục Cung cấp & Chiến thắng Điện Biên Phủ.</p></div>
+        </div>
+        <div class="container right" onclick="openModal(2)">
+            <div class="content"><span class="year">1954 - 1975</span><h2>Kháng chiến chống Mỹ</h2><p>Thành lập Tổng cục Kỹ thuật & Chiến dịch Hồ Chí Minh lịch sử</p></div>
+        </div>
+        <div class="container left" onclick="openModal(3)">
+            <div class="content"><span class="year">1975 - NAY</span><h2>Xây dựng & Bảo vệ Tổ quốc</h2><p>Hợp nhất & Hiện đại hóa.</p></div>
+        </div>
+    </div>
+
+    <div class="awards-section">
+        <h2 class="awards-title">Phần thưởng cao quý</h2>
+        <div class="award-grid">
+            <div class="award-item">🥇 02 Huân chương Sao vàng</div>
+            <div class="award-item">🎖️ 05 Huân chương Hồ Chí Minh</div>
+            <div class="award-item">⚔️ 03 Huân chương Quân công Hạng Nhất</div>
+            <div class="award-item">🛡️ 02 Huân chương Bảo vệ Tổ quốc Hạng Nhất</div>
+            <div class="award-item">🎖️ Danh hiệu AHLLVTND</div>
+        </div>
+    </div>
+
+    <div id="infoModal" class="modal" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalBody" class="modal-inner"></div>
+        </div>
+    </div>
+
+    <script>
+        const store = {
+            1: {
+                t: "Giai đoạn 1945 - 1954",
+                c: `
+                    <div class="data-point"><b>Ngày 22/12/1944:</b> Đội VN Tuyên truyền Giải phóng quân ra đời với <span class="highlight">34 cán bộ</span>, 34 khẩu súng và 20 đồng bạc Đông Dương.</div>
+                    <div class="data-point"><b>Ngày 11/7/1950:</b> Thành lập <b>Tổng cục Cung cấp</b>Đồng chí Trần Đăng Ninh là Chủ nhiệm đầu tiên.</div>
+                    <div class="data-point"><b>Chiến dịch Điện Biên Phủ:</b> Huy động <span class="highlight">261.451 dân công</span>, 20.991 xe đạp thồ, vận chuyển 30.759 tấn lương thực & 1.200 tấn đạn dược.</div>`
+            },
+            2: {
+                t: "Giai đoạn 1954 - 1975",
+                c: `
+                    <div class="data-point"><b>Năm 1959:</b> Mở đường Hồ Chí Minh (Đoàn 559) tạo kỳ tích vận tải chiến lược xuyên Trường Sơn.</div>
+                    <div class="data-point"><b>Ngày 10/9/1974:</b> Thành lập <b>Tổng cục Kỹ thuật</b> nhằm đáp ứng yêu cầu hiện đại hóa vũ khí.</div>
+                    <div class="data-point"><b>Chiến dịch Xuân 1975:</b> Dự trữ <span class="highlight">4.375.000 tấn vật chất</span>, huy động trên 10.000 xe ô tô hành quân thần tốc.</div>`
+            },
+            3: {
+                t: "Giai đoạn 1975 - Nay",
+                c: `
+                    <div class="data-point"><b>Bảo vệ Biên giới:</b> Bảo đảm cho chiến đấu bảo vệ biên giới Tây Nam, Phía Bắc và làm nghĩa vụ quốc tế tại Lào, Campuchia.</div>
+                    <div class="data-point"><b>Từ năm 1986:</b> Đổi mới cơ chế quản lý, đẩy mạnh phong trào "Ngành Hậu cần Quân đội làm theo lời Bác Hồ dạy".</div>
+                    <div class="data-point"><b>Kết quả hiện nay:</b> Tỷ lệ quân số khỏe luôn đạt <span class="highlight">trên 98,5%</span>. Thực hiện hiệu quả Cuộc vận động 50 về quản lý kỹ thuật.</div>
+                    <div class="data-point"><b>Dấu mốc 2024:</b> Hợp nhất thành <b>Tổng cục Hậu cần - Kỹ thuật</b> theo hướng tinh gọn, mạnh, hiện đại.</div>`
+            }
+        };
+
+        function openModal(id) {
+            document.getElementById('modalBody').innerHTML = `<h3>${store[id].t}</h3>${store[id].c}`;
+            document.getElementById('infoModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+        function closeModal() {
+            document.getElementById('infoModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
