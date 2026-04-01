@@ -6,7 +6,12 @@
     <title>Lãnh đạo Tổng cục Hậu cần - Kỹ thuật hiện nay</title>
     <link href="https://fonts.googleapis.com" rel="stylesheet">
     <style>
-        body {
+       	{
+    box-sizing: border-box; /* Giúp 100% width không bị cộng thêm padding */
+    margin: 0;
+    padding: 0;
+	}
+	body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
@@ -16,6 +21,7 @@
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
+	    overflow-x: hidden;
         }
         .overlay {
             position: fixed;
@@ -87,14 +93,18 @@
         }
         .leader-photo {
             width: 70px;
-            height: 90px;
+            min-width: 70px;
+	    height: 90px;
             object-fit: cover;
             border-radius: 4px;
             margin-right: 15px;
             border: 1px solid #adb5bd;
             background-color: #f0f0f0;
         }
-        .leader-details strong {
+        .leader-details {
+            flex: 1; 
+            min-width: 0;
+	.leader-details strong {
             display: block;
             font-size: 15px;
             color: #001f3f;
@@ -115,7 +125,7 @@
 <body>
     <div class="overlay"></div>
     <div class="container">
-        <h1>Lãnh đạo <br>Tổng cục Hậu cần - Kỹ thuật<br> qua các thời kỳ</h1>
+        <h1>Lãnh đạo Tổng cục Hậu cần - Kỹ thuật</h1>
 
         <!-- Mục Chủ nhiệm Tổng cục  -->
         <div class="leader-category">
