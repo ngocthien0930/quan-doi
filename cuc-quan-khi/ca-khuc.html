@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài ca người chiến sĩ quân khí</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 15px;
+        }
+        .header {
+            text-align: center;
+            color: #C62828;
+            border-bottom: 2px solid #C62828;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header h1 { margin: 5px 0; font-size: 22px; }
+        .header p { margin: 0; font-style: italic; color: #555; }
+
+        details {
+            background: #fff;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border-left: 4px solid #C62828;
+        }
+        summary {
+            padding: 12px 15px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            outline: none;
+            background: #fff;
+            color: #C62828;
+        }
+        details[open] summary {
+            border-bottom: 1px solid #eee;
+            background: #f9f9f9;
+        }
+        .content {
+            padding: 15px;
+        }
+        .info {
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .info b { color: #b71c1c; }
+        
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* Tỷ lệ khung hình 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 10px 0;
+            border-radius: 5px;
+            background: #000;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        .lyrics {
+            white-space: pre-line;
+            font-style: italic;
+            background: #fffbe6;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 15px;
+            border: 1px inset #ddd;
+        }
+    </style>
+</head>
+<body>
+
+    <details>
+        <summary>Bài ca người chiến sĩ quân khí</summary>
+        <div class="content">
+            <div class="info">
+                <b>Lời thơ:</b> Trung tướng Lê Quý Đạm<br>
+                <b>Nhạc:</b> Nguyễn Trung Hiếu
+            </div>
+            <div class="video-container">
+                <iframe 
+                    src="https://www.youtube.com/embed/nRuRteYqiew" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="lyrics">
+                Đoàn quân Việt Nam đi chung lòng cứu quốc
+            </div>
+        </div>
+    </details>
+
+</body>
+</html>

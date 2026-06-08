@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bộ sưu tập ảnh</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .gallery-container {
+            display: flex;
+            flex-direction: column; /* Xếp ảnh theo chiều dọc trên mobile */
+            align-items: center;
+            padding: 10px;
+        }
+        .gallery-item img {
+            width: 100%; /* Ảnh chiếm toàn bộ chiều rộng màn hình mobile */
+            height: auto;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery-container">
+        <div class="gallery-item">
+            <img src="lich-su/1.png" alt="Ảnh 1">
+        </div>
+    </div>
+
+</body>
+</html>
