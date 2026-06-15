@@ -3,136 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timeline Lịch sử Tổng cục Hậu cần - Kỹ thuật</title>
+    <title>Lịch sử truyền thống TCHCKT</title>
     <style>
-        :root {
-            --army-dark: #1b3014;
-            --army-green: #2d4d22;
-            --gold: #d4af37;
-            --white: #ffffff;
-            --bg: #f0f2f0;
-            --red-medal: #c0392b;
+        body { 
+            font-family: 'Times New Roman', serif; 
+            padding: 20px; 
+            line-height: 1.8; 
+            color: #222; 
+            max-width: 700px; 
+            margin: 0 auto; 
+            background-color: #fcfcfc;
+        }
+        h1 {
+            color: #d32f2f;
+            text-align: center;
+            font-size: 22px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        h2 { 
+            color: #b71c1c; 
+            text-align: justify; 
+            font-size: 17px;
+            font-weight: bold;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #333;
+            font-size: 15px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        p {
+            text-align: justify; 
+            margin-bottom: 15px;
+            text-indent: 30px; /* Thụt lề đầu dòng chuẩn thể thức */
+            margin-top: 0;
+        }
+        ul {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            padding-left: 35px;
+            text-align: justify;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+        img { 
+            width: 100%; 
+            height: auto; 
+            border-radius: 8px; 
+            margin: 15px 0; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15); 
+            display: block; 
+        }
+        .highlight {
+            font-weight: bold;
+            font-style: italic;
         }
 
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); margin: 0; padding: 0; color: #333; }
-
-        /* Tiêu đề */
-        .header { background: var(--army-dark); color: var(--gold); padding: 30px 20px; text-align: center; border-bottom: 4px solid var(--gold); }
-        .header h1 { margin: 0; font-size: 1.4rem; text-transform: uppercase; letter-spacing: 1px; }
-
-        /* Timeline chính */
-        .timeline { position: relative; max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        .timeline::after { content: ''; position: absolute; width: 4px; background-color: var(--army-green); top: 0; bottom: 0; left: 50%; margin-left: -2px; }
-
-        .container { padding: 10px 40px; position: relative; width: 50%; cursor: pointer; }
-        .container::after { content: ''; position: absolute; width: 20px; height: 20px; right: -10px; background-color: var(--white); border: 4px solid var(--gold); top: 15px; border-radius: 50%; z-index: 1; }
-        .left { left: 0; text-align: right; }
-        .right { left: 50%; text-align: left; }
-        .right::after { left: -10px; }
-
-        .content { padding: 15px 20px; background: var(--white); border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: 0.3s; border-bottom: 4px solid var(--gold); }
-        .container:hover .content { transform: translateY(-5px); }
-        .content h2 { margin: 0; color: var(--army-green); font-size: 1.1rem; }
-        .content .year { display: inline-block; background: var(--army-green); color: var(--gold); padding: 2px 12px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; margin-bottom: 8px; }
-
-        /* Modal Popup */
-        .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; padding: 20px; }
-        .modal-content { background: var(--white); width: 100%; max-width: 500px; border-radius: 15px; position: relative; overflow: hidden; border-top: 10px solid var(--army-green); animation: popIn 0.3s ease; }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .close { position: absolute; top: 10px; right: 15px; font-size: 24px; color: #999; cursor: pointer; z-index: 2; }
-        .modal-inner { padding: 25px; max-height: 80vh; overflow-y: auto; }
-        .modal-inner h3 { color: var(--army-green); border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-top: 0; }
-        
-        .data-point { background: #f4f6f4; border-left: 4px solid var(--gold); padding: 12px; margin: 15px 0; font-size: 0.9rem; border-radius: 0 6px 6px 0; }
-        .data-point b { color: var(--army-dark); display: block; margin-bottom: 4px; border-bottom: 1px dashed #ccc; }
-        .highlight { color: var(--red-medal); font-weight: bold; }
-
-        /* Phần thưởng */
-        .awards-section { max-width: 800px; margin: 20px auto 50px; padding: 20px; background: var(--white); border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-        .awards-title { text-align: center; color: var(--army-dark); border-bottom: 2px solid var(--gold); padding-bottom: 10px; margin-bottom: 20px; text-transform: uppercase; font-size: 1.1rem; }
-        .award-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-        .award-item { display: flex; align-items: center; background: #fdfbf2; padding: 10px; border-radius: 8px; border-left: 4px solid var(--red-medal); font-size: 0.85rem; }
-
-        @media screen and (max-width: 600px) {
-            .timeline::after { left: 31px; }
-            .container { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
-            .container::after { left: 21px; right: auto; }
-            .right { left: 0%; }
+        /* CSS phục vụ tính năng Hiển thị thêm */
+        .more-text {
+            display: none; /* Mặc định ẩn phần nội dung chi tiết */
+        }
+        .toggle-btn {
+            display: block;
+            margin: 25px auto;
+            padding: 9px 22px;
+            background-color: #d32f2f;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-family: 'Times New Roman', serif;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .toggle-btn:hover {
+            background-color: #b71c1c;
+        }
+        .toggle-btn:active {
+            transform: scale(0.97); /* Hiệu ứng nhấn nút trên di động */
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Lịch sử & Truyền thống<br>Tổng cục Hậu cần - Kỹ thuật</h1>
+      <img src="1.jpg">
+
+
+  
+    <div id="extendedContent" class="more-text">
+
+    <h1>TRUYỀN THỐNG LỊCH SỬ<br>TỔNG CỤC HẬU CẦN - KỸ THUẬT</h1>
+
+    <h2>I. SỰ HÌNH THÀNH, PHÁT TRIỂN CỦA NGÀNH HẬU CẦN, KỸ THUẬT QUÂN ĐỘI</h2>
+    
+    <h3>1. Công tác hậu cần, kỹ thuật trong kháng chiến chống thực dân Pháp, thành lập Tổng cục Cung cấp và những bước phát triển toàn diện của ngành Hậu cần, Kỹ thuật (1945 - 1954)</h3>
+    <p>Theo chỉ đạo của Chủ tịch Hồ Chí Minh, ngày 22 tháng 12 năm 1944, Đội Việt Nam tuyên truyền giải phóng quân được thành lập. Đội có 34 cán bộ, chiến sĩ, được trang bị 34 khẩu súng các loại, cùng một số lựu đạn, mìn và 20 đồng bạc Đông Dương để chi tiêu nuôi dưỡng, thuốc men cho đơn vị. Ngay sau khi thành lập, Đội đã ra quân đánh thắng trận đầu, tiêu diệt gọn quân địch ở hai đồn Phai Khắt (đêm 25/12) và Nà Ngần (sáng 26/12/1944). Trong hoạt động và chiến đấu những ngày đầu mới thành lập, việc tiếp tế cho Đội do các cơ sở quần chúng, các đoàn thể phụ nữ địa phương đảm nhiệm.</p>
+    <p>Cách mạng Tháng Tám năm 1945 thành công, Tổ quốc được độc lập, Nhân dân ta được tự do, làm chủ đất nước. Sau tổng tuyển cử bầu Quốc hội khóa I (06/01/1946), Chính phủ Liên hiệp được thành lập. Ngày 25 tháng 3 năm 1946, Chủ tịch Hồ Chí Minh ký Sắc lệnh số 34/SL về tổ chức Bộ Quốc phòng, trong đó có Quân nhu Cục, Chế tạo quân giới Cục, Quân y Cục và Công chính giao thông Cục. Đến thời kỳ này, ngành Hậu cần - Kỹ thuật đã bước đầu hình thành ở các cấp theo chuyên ngành và bước đầu có sự chỉ đạo, bảo đảm một số nhu cầu thiết yếu của Quân đội, đặt những viên gạch đầu tiên, tạo nền móng cho sự ra đời và phát triển của ngành Hậu cần, Kỹ thuật trong Quân đội.
+Năm 1946, khi cuộc kháng chiến chống thực dân Pháp bùng nổ, lực lượng Hậu cần, Kỹ thuật khẩn trương di chuyển các cơ sở quân nhu, quân y, quân giới lên căn cứ địa Việt Bắc. Để đánh vào đồn, bốt của địch, cuối tháng 02/1947, Cục Quân giới và Nha Nghiên cứu kỹ thuật chế tạo thành công súng và đạn Bazôca. Tháng 5/1949, đồng chí Trần Đại Nghĩa cùng các kỹ sư Cục Quân giới đã chế tạo thành công súng không giật SKZ 60mm... Những sáng chế đó góp phần quan trọng bảo đảm trang bị cho Quân đội ta chiến đấu thắng lợi và từng bước hình thành hệ thống chỉ đạo, sản xuất, sửa chữa, bảo quản, vận chuyển, cấp phát vũ khí, đạn trong Quân đội. Ngày 18 tháng 6 năm 1949, Chủ tịch Hồ Chí Minh ký Sắc lệnh số 50/SL về tổ chức và nhiệm vụ của cơ quan Bộ Quốc phòng - Tổng Tư lệnh, quyết định thành lập Cục Vận tải, thuộc Bộ Tổng Tham mưu. </p>
+    <p>Thực hiện Nghị quyết Hội nghị toàn quốc lần thứ Ba của Đảng (tháng 01 năm 1950), ngày 11 tháng 7 năm 1950, Chủ tịch Hồ Chí Minh ký Sắc lệnh 121/SL quy định tổ chức Bộ Quốc phòng - Tổng Tư lệnh, gồm ba cơ quan: Bộ Tổng Tham mưu, Tổng cục Chính trị, Tổng cục Cung cấp. Nhiệm vụ của Tổng cục Cung cấp là quản trị, trang bị, cấp dưỡng quân đội và sản xuất quốc phòng, gồm các cục: Quân lương, Quân trang, Quân y, Quân giới, Vận tải, Quân vụ và phòng Quân khí. Trước đó, cùng với sự ra đời của các đại đoàn chủ lực các ban quân khí được thành lập để đảm bảo TBKT và sửa chữa vũ khí. Đến ngày 01/9/1951, Đại tướng Võ Nguyên Giáp, Bộ trưởng Bộ Quốc phòng, Tổng Tư lệnh Quân đội nhân dân Việt Nam ký Quyết định số 227/QĐ về việc thành lập Cục Quân khí trực thuộc Tổng cục Cung cấp, trên cơ sở Phòng Quân khí.</p>
+    <p>Ngay sau khi ra đời Tổng cục Cung cấp đã bảo đảm công tác hậu cần, kỹ thuật phục vụ các lực lượng vũ trang mở các chiến dịch quy mô ngày càng lớn. Ngày 25 tháng 6 năm 1952, Chủ tịch Hồ Chí Minh đến thăm và nói chuyện với Hội nghị cung cấp toàn quân lần thứ nhất, Người căn dặn: “Công việc cung cấp cũng quan trọng như việc trực tiếp đánh giặc ngoài mặt trận” và  “... Các chú phải làm thế nào một bát gạo, một đồng tiền, một viên đạn, một viên thuốc, một tấc vải phải đi thẳng tới chiến sĩ...”. </p>
+    <p>Đặc biệt, trong chiến dịch Điện Biên Phủ, ngành Hậu cần, Kỹ thuật đã bảo đảm đầy đủ, kịp thời vũ khí, khí tài cho chiến đấu, lương thực, thực phẩm nuôi dưỡng bộ đội và cấp cứu, điều trị cho hàng nghìn lượt thương-bệnh binh, góp phần to lớn vào chiến thắng lịch sử Điện Biên Phủ. Đây là minh chứng cho bước phát triển vượt bậc của ngành Hậu cần, Kỹ thuật quân đội, cho công tác hậu cần, kỹ thuật.</p>
+
+    <h3>2. Công tác bảo đảm hậu cần, kỹ thuật phục vụ cuộc kháng chiến chống Mỹ cứu nước và sự ra đời của Tổng cục Kỹ thuật (1954-1975)</h3>
+    <p>Sau thắng lợi của cuộc kháng chiến chống thực dân Pháp, đất nước tạm bị chia làm hai miền. Cùng với các lực lượng vũ trang nhân dân, ngành Hậu cần Quân đội đã tích cực tham gia khôi phục kinh tế, góp phần tăng cường tiềm lực mọi mặt của hậu phương; bảo đảm và phục vụ Quân đội xây dựng chính quy, hiện đại trên miền Bắc; giữ gìn lực lượng, khôi phục các cơ sở hậu cần ở miền Nam; đồng thời, tích cực xây dựng ngành tiến dần từng bước lên chính quy hiện đại. Tổng Quân ủy và Bộ Quốc phòng chỉ đạo xây dựng lại hệ thống bảo đảm công tác hậu cần, công tác kỹ thuật toàn quân. Theo quyết định ngày 13/01/1955 của Bộ Quốc phòng, Tổng cục Cung cấp đổi tên thành Tổng cục Hậu cần. Tổng cục Hậu cần có các cục: Quân nhu, Quân y, Vận tải, Quân giới, Quân khí, Chính trị, Văn phòng và Phòng Sản xuất trang dụng. Ở các Liên khu (từ cuối năm 1956 thành lập các quân khu) có phòng hậu cần. Đến giữa năm 1962, phòng hậu cần quân khu chuyển thành cục hậu cần, các ban chuyển thành các phòng thuộc cục.</p>
+    <p>Năm 1960, cách mạng miền Nam chuyển sang thế tiến công, nhu cầu vũ khí, trang bị đòi hỏi ngày càng lớn. Theo chỉ thị của Bộ Chính trị và Quân ủy Trung ương, ngành Hậu cần đã nhanh chóng tổ chức lực lượng chi viện. Hai tuyến vận tải chiến lược được mở ra, góp phần phục vụ đắc lực các lực lượng vũ trang xây dựng, chiến đấu cùng đồng bào miền Nam làm phá sản chiến lược “Chiến tranh đặc biệt” của đế quốc Mỹ. </p>
+    <p>Năm 1965, đế quốc Mỹ phải chuyển sang chiến lược “Chiến tranh cục bộ”, ồ ạt đưa quân vào miền Nam và tiến hành “Chiến tranh phá hoại” miền Bắc. Năm 1966, Cục Vận tải được thành lập lại; ngày 24/8/1968 Bộ Quốc phòng quyết định tách Phòng Xăng dầu khỏi cục Quản lý xe để thành lập Cục Xăng dầu; tháng 6/1968, Trường Đại học Kỹ thuật quân sự được thành lập (nay là Học viện KTQS); nhiều nhà máy, dây chuyền mới sản xuất, sửa chữa vũ khí, đạn dược thuộc Cục Quân giới và các quân khu, quân chủng, binh chủng được thành lập. Ngày 04/9/1969, Cục Kỹ thuật Quân chủng Phòng không - Không quân được thành lập; ngày 06/5/1970, Cục Kỹ thuật Quân chủng Hải quân được thành lập. 
+Chiến tranh phá hoại và ngăn chặn của không quân, hải quân Mỹ, phần lớn nhằm vào các cơ sở hậu cần, các tuyến đường, lực lượng và phương tiện giao thông vận tải. Nhờ đường lối đúng đắn, sáng tạo, độc lập, tự chủ của Đảng, chỗ dựa vững chắc là hậu cần nhân dân, đồng thời, tranh thủ được sự giúp đỡ quốc tế, hậu cần quân đội đã phát triển vượt bậc về mọi mặt, vượt qua khó khăn, gian khổ ác liệt, liên tục bảo đảm phục vụ tác chiến hiệp đồng quân binh chủng quy mô ngày càng lớn trong các chiến dịch, các cuộc tiến công chiến lược ở miền Nam. Năm 1972, Cục Quân khí đã cung cấp cho các đơn vị 20.559 tấn vũ khí trang bị (9.540 tấn vũ khí, 11.019 tấn đạn), Cục Quản lý xe đã sửa chữa và bàn giao cho đơn vị 4.715 xe ô tô, sửa chữa 250 xe xích kéo pháo cho Quân chủng Phòng không - Không quân, sản xuất hàng nghìn tấn phụ tùng vật tư ô tô, hàng trăm tấn phụ tùng xe xích, góp phần cùng với quân và dân cả nước giành thắng lợi ở chiến trường miền Nam và Chiến dịch “Điện Biên phủ trên không” ở miền Bắc vào cuối năm 1972, buộc Mỹ phải ký Hiệp định Paris (ngày 27/01/1973), chấm dứt chiến tranh, lập lại hoà bình ở Việt Nam và rút quân về nước.</p>
+    <p>Ngày 13/10/1973, Hội nghị lần thứ 21 Ban Chấp hành Trung ương Đảng khóa III ra Nghị quyết về hoàn thành cuộc cách mạng dân tộc, dân chủ, nhân dân ở miền Nam. Ngày 10/9/1974, Thủ tướng Chính phủ Phạm Văn Đồng ký Nghị định số 211/CP về việc thành lập Tổng cục Kỹ thuật thuộc Bộ Quốc phòng. Tổng cục Kỹ thuật được thành lập đánh dấu bước phát triển quan trọng của công tác kỹ thuật toàn quân, tạo điều kiện thuận lợi để ngành Kỹ thuật Quân đội thực hiện nhiệm vụ theo sự chỉ đạo tập trung, thống nhất từ một cơ quan đầu ngành, đáp ứng yêu cầu nhiệm vụ giải phóng dân tộc. Ngày 10/9/1974 trở thành Ngày truyền thống của Tổng cục Kỹ thuật. </p>
+    <p>Trong giai đoạn chuẩn bị và mở Chiến dịch Tây Nguyên, Tổng cục Hậu cần đã tổ chức vận chuyển cấp tốc, bí mật Sư đoàn 316 từ Tân Kỳ, Nghệ An vào chiến trường và cùng hàng vạn tấn vũ khí, khí tài, xăng dầu, lương thực, thực phẩm cung cấp cho các đơn vị; Tổng cục Kỹ thuật đã tổ chức các tổ, đội, trạm sửa chữa cơ động và cấp phát kịp thời, an toàn, bí mật hàng ngàn tấn vũ khí, đạn dược cho các đơn vị, góp phần rất quan trọng vào chiến thắng Chiến dịch Tây Nguyên, sau là Chiến dịch Huế - Đà Nẵng. </p>
+    <p>Trong giai đoạn chuẩn bị cho Chiến dịch Hồ Chí Minh, Cục Vận tải đã huy động hàng vạn phương tiện vận chuyển cơ động Quân đoàn 1 từ Tam Điệp, Ninh Bình và các đơn vị binh chủng từ miền Bắc vào Nam bộ; lực lượng xăng dầu đã xây lắp thêm hàng trăm km đường ống nối dài vào khu vực Sài Gòn-Gia Định; lực lượng quân y đã đưa hàng trăm bác sĩ, y tá, xây dựng các bệnh viện dã chiến theo sau các mặt trận. Tổng cục Kỹ thuật đã chỉ đạo các cục chuyên ngành cử hàng trăm cán bộ, nhân viên kỹ thuật tăng cường và BĐTB, BĐKT ưu tiên cho các quân đoàn chủ lực; các quân chủng, binh chủng. </p>
+    <p>11 giờ 30 phút cùng ngày, lá cờ chiến thắng của cách mạng phấp phới tung bay trên nóc dinh Độc lập, Chiến dịch mang tên Chủ tịch Hồ Chí Minh vĩ đại đã toàn thắng. Trong Chiến dịch Hồ Chí Minh lịch sử, ngành Hậu cần, Kỹ thuật đã bảo đảm đầy đủ, kịp thời vật chất hậu cần, kỹ thuật cho các đơn vị tác chiến thắng lợi, góp phần rất quan trọng vào thắng lợi của Chiến dịch.</p>
+
+    <h3>3. Công tác Hậu cần, Kỹ thuật trong thời kỳ cả nước xây dựng chủ nghĩa xã hội, bảo vệ Tổ quốc và làm nhiệm vụ quốc tế  (1975 - 1990)</h3>
+    <p>Sau ngày miền Nam hoàn toàn giải phóng, đất nước ta tiến hành hai nhiệm vụ chiến lược là xây dựng và bảo vệ Tổ quốc Việt Nam XHCN. Nhiệm vụ đặt ra cho Tổng cục Hậu cần, Tổng cục Kỹ thuật những yêu cầu mới, trước hết là chấn chỉnh tổ chức lực lượng phù hợp với yêu cầu, nhiệm vụ. Về công tác hậu cần, Tổng cục Hậu cần đã tiếp quản, sửa chữa, củng cố các bệnh viện quân y của chế độ cũ, đưa vào phục vụ quân đội; tiến hành di chuyển các kho hậu cần từ rừng sâu về các thành phố, thị xã theo quy hoạch thời bình và tiếp nhận toàn bộ Đoàn 559 về Tổng cục. Đồng thời, bảo đảm hậu cần thường xuyên cho các đơn vị và chuyển một số lực lượng sang làm nhiệm vụ xây dựng kinh tế.  </p>
+    <p>Về công tác kỹ thuật, tập trung thực hiện 3 nhiệm vụ là: (1) Khẩn trương thu hồi, quản lý, bảo quản, sửa chữa và có kế hoạch sử dụng các cơ sở vật chất kỹ thuật thu được của địch; (2) Nhanh chóng thu gom các loại TBKT, vật tư của ta còn trên các tuyến vận tải quân sự, các địa phương để bảo quản tốt hơn, kiện toàn hệ thống kho tàng; (3) Đi đôi với việc xây dựng nền kinh tế độc lập tự chủ, ta cần kết hợp tích cực xây dựng nền công nghiệp quốc phòng có sửa chữa, có sản xuất, từng bước sản xuất các vũ khí hiện đại cần thiết, tiến đến tự trang bị vũ khí, kỹ thuật hiện đại cho LLVT. </p>
+    <p>Thực hiện chủ trương kiện toàn tổ chức, xây dựng lực lượng để phù hợp với tình hình mới, Tổng cục đã chấn chỉnh, tổ chức lại hệ thống kho tàng, xây dựng các nhà máy, xí nghiệp sửa chữa, sản xuất gồm: 24 kho vũ khí đạn, 09 kho xe máy và vật tư xe máy, 04 xưởng sửa chữa vũ khí, khí tài, 08 xưởng sửa chữa ô tô, 08 xí nghiệp sản xuất vũ khí, khí tài, 05 xí nghiệp sản xuất phụ tùng linh kiện. Đến năm 1978, Tổng cục có 61 đầu mối trực thuộc, gồm 13 cục và tương đương, 01 viện, 04 phân viện, 08 trường, 28 xí nghiệp, 02 trung đoàn vận tải và 05 phòng, ban trực thuộc. </p>
+    <p>Tháng 12/1977, tập đoàn phản động Pôn Pốt, Iêng Sa Ry đã tiến hành xâm lấn biên giới, tàn sát giết hại hàng nghìn đồng bào ta rất dã man, buộc chúng ta phải tiến hành chiến tranh bảo vệ biên giới Tây Nam và giúp nhân dân Campuchia đứng lên đánh đổ chế độ diệt chủng (ngày 07/01/1979). Trong giai đoạn này, TCHC đã vận chuyển bảo đảm vật chất hậu cần cho các đơn vị làm nhiệm vụ quốc tế tại Campuchia; đồng thời, chỉ đạo hậu cần các đơn vị đẩy mạnh khai thác hậu cần tại chỗ, kết hợp tăng gia sản xuất để bảo đảm đời sống bộ đội. Tổng cục Kỹ thuật đã tổ chức Sở chỉ huy Tiền phương và huy động hàng nghìn pháo, cối, ĐKZ, gần 02 vạn tấn đạn dược, bom, mìn các loại và hàng nghìn tấn vật tư, phụ tùng; các nhà máy của Tổng cục tăng cường sản xuất, sửa chữa TBKT và cử các đội sửa chữa cơ động đến các đơn vị chiến đấu BĐKT tại chỗ. Sau giải phóng Campuchia, Tổng cục tổ chức các trạm, đội cơ động làm nhiệm vụ thu gom, cứu kéo các loại TBKT sau chiến tranh.  </p>
+    <p>Trong cuộc chiến đấu bảo vệ biên giới phía Bắc. Ngay khi Trung Quốc điều động, triển khai lực lượng quân sự áp sát biên giới nước ta, Tổng cục Hậu cần, Tổng cục Kỹ thuật đã chỉ đạo xây dựng và tổ chức hệ thống căn cứ hậu cần, căn cứ kỹ thuật của Bộ, của quân khu và các đơn vị ở biên giới phía Bắc; khẩn trương di chuyển một số đơn vị, kho, nhà máy, xí nghiệp về phòng tuyến phía sau. Ngày 17/02/1979, Tổng cục Kỹ thuật đã tổ chức điều chuyển cấp tốc số lượng lớn vũ khí, đạn từ Quảng Trị vượt gần 1.000 km lên thẳng Ngân Sơn, Cao Bằng; sau đó, phối hợp chặt chẽ với các quân khu và TCHC chuyển vũ khí, đạn tới các sư đoàn, trung đoàn và xây dựng các kho TBKT với trữ lượng khoảng trên 40 nghìn tấn. Cục Vận tải TCHC vừa sử dụng tối đa phương tiện vận chuyển người, vũ khí, TBKT Quân đoàn 2, Quân đoàn 3 từ Campuchia ra chốt giữ trên các tuyến biên giới phía Bắc. Cục Xăng dầu, một mặt thống nhất với các tỉnh biên giới bảo đảm xăng dầu cho bộ đội theo chế độ thời chiến, một mặt khẩn trương thi công kho tàng, bảo đảm đủ lượng dự trữ theo yêu cầu của Bộ.</p>
+    <p>Để nâng cao hiệu quả công tác BĐTB, BĐKT trong Quân đội, TCKT đã tham mưu, đề nghị Bộ Quốc phòng kiện toàn hệ thống cơ quan quản lý, chỉ đạo công tác kỹ thuật toàn quân. Ngày 24/02/1979, Bộ trưởng Bộ Quốc phòng ra Quyết định số 177/QĐ-QP về việc thành lập cục kỹ thuật ở cấp quân khu, quân đoàn, binh chủng; ở cấp sư đoàn, lữ đoàn tổ chức phòng kỹ thuật và cấp trung đoàn thành lập ban kỹ thuật. Nhiệm vụ của các cơ quan kỹ thuật là tổ chức thực hiện các mặt công tác quản lý, BĐTB, BĐKT cho đơn vị mình và các đơn vị khác thực hiện nhiệm vụ trên địa bàn, phục vụ có hiệu quả yêu cầu chiến đấu và SSCĐ. Hệ thống cơ quan kỹ thuật theo ngành dọc từ Bộ Quốc phòng đến cấp trung đoàn được tổ chức kiện toàn, hoạt động theo chức năng nhiệm vụ mới.
+Trước thực trạng các nhà máy, xí nghiệp trong TCKT hoạt động không hiệu quả, đời sống của người lao động gặp nhiều khó khăn, ngày 23/5/1987, Thường vụ ĐUQSTW ra Nghị quyết số 105/ĐUQSTW về lãnh đạo chuyển cơ chế quản lý chỉ đạo BĐKT theo cấp, sang cơ chế quản lý chỉ đạo BĐKT theo chuyên ngành (10 chuyên ngành: Quân khí, Xe máy, Đo lường, Không quân, Phòng không, Hải quân, Tăng Thiết giáp, Công binh, Thông tin và Hoá học); chấn chỉnh tổ chức TCKT và thành lập TCCNQP. </p>
+    <p>Sau hơn 1 năm thực hiện cơ chế quản lý BĐKT mới đã bộc lộ những hạn chế, bất cập ảnh hưởng đến công tác chỉ huy, chỉ đạo và hiệu quả BĐKT trong Quân đội cần phải kịp thời điều chỉnh. Hội nghị ĐUQSTW và Bộ Quốc phòng xác định phải sớm kiện toàn lại TCKT và đề nghị Hội đồng Bộ trưởng về việc tổ chức lại TCKT. Quyết định ghi rõ “TCKT là cơ quan trực thuộc Bộ Quốc phòng, có chức năng chỉ đạo công tác BĐTB, BĐKT của LLVT; chỉ đạo công tác nghiên cứu KHKTQS, phối hợp với TCCNQP và Kinh tế giúp Bộ Quốc phòng làm tham mưu cho Nhà nước về động viên công nghiệp phục vụ cho công tác sản xuất và sửa chữa trang bị quốc phòng”; đồng thời, quy định 09 nhiệm vụ của TCKT và cơ cấu của TCKT.  </p>
+
+
+    <h3>4. Ngành Hậu cần, Kỹ thuật trong thời kỳ đổi mới, đẩy mạnh công nghiệp hóa, hiện đại hóa, xây dựng quân đội cách mạng, chính quy, tinh nhuệ, từng bước hiện đại (1990 - nay)</h3>
+    <p>Sau khi kết thúc cuộc chiến tranh bảo vệ biên giới phía Bắc và rút quân tình nguyện ở Campuchia về nước, việc bảo đảm hậu cần, TBKT cho Quân đội chịu ảnh hưởng nặng nề do khủng hoảng kinh tế - xã hội. Thực hiện chủ trương tinh giản lực lượng, điều chỉnh thế bố trí chiến lược phòng thủ đất nước, ngành Hậu cần, Kỹ thuật từ cấp chiến lược, chiến dịch, đến cấp chiến thuật đều có sự điều chỉnh lớn.  </p>
+    <p>Những năm 1993-1999, từ thực tiễn Đảng ủy, chỉ huy TCHC đã tổng kết và đề xuất với Đảng ủy Quân sự Trung ương - Bộ Quốc phòng chủ trương đổi mới phương thức bảo đảm hậu cần trong quân đội. Nội dung là, từ bảo đảm chủ yếu bằng hiện vật, chuyển sang bảo đảm cơ bản bằng tiền, gắn với hoàn thiện quy chế mua sắm tạo nguồn chặt chẽ, ngày càng mở rộng hình thức đấu thầu và tăng cường phân cấp bảo đảm cho đơn vị; đồng thời, kịp thời đề xuất điều chỉnh mức tiền ăn theo kịp giá thị trường để bảo đảm tiêu chuẩn, định lượng cho bộ độ, từng bước ổn định và cải thiện đời sống bộ đội.  </p>
+    <p>Một trong những thành công nổi bật của ngành Hậu cần thời kỳ này là đầu tư xây dựng, nâng cao năng lực sản xuất, kinh doanh công nghiệp hậu cần. Từ chỗ, hầu hết phải nhập khẩu hoặc do các doanh nghiệp Nhà nước cung cấp đến năm 2000, các doanh nghiệp của TCHC đã được đầu tư xây dựng một số nhà máy dây chuyền tiên tiến, công nghệ hiện đại, đủ khả năng sản xuất tròn khâu. Trên lĩnh vực xây dựng, các doanh nghiệp hậu cần đã thực hiện khảo sát, thiết kế, xây dựng các sân bay, bến cảng, kho chứa hàng, kho xăng dầu, nhà ở doanh trại, đập thủy điện và các công trình quân sự hiện đại. Ngoài phục vụ quốc phòng, còn sản xuất hàng kinh tế, xuất khẩu mỗi năm doanh thu hàng chục nghìn tỷ đồng, góp phần phát triển kinh tế đất nước. </p>
+    <p>Nhiệm vụ trọng tâm của ngành Kỹ thuật thời kỳ này là sắp xếp lại tổ chức, biên chế và nghiên cứu ban hành các chế độ, quy định, điều lệ công tác quản lý vũ khí, trang bị kỹ thuật trong toàn quân. Thực hiện quyết định của Bộ trưởng Bộ Quốc phòng về sắp xếp lại tổ chức, biên chế Tổng cục Kỹ thuật, trong đó, điều chuyển nguyên trạng Cục Tiêu chuẩn - Đo lường - Chất lượng thuộc TCKT về trực thuộc Bộ Quốc phòng, thành lập Cục Kỹ thuật Binh chủng (KTBC). Đặc biệt, ĐUQSTW đã ban hành Nghị quyết chuyên đề số 382-NQ/ĐUQSTW ngày 29/11/2007 về lãnh đạo CTKT trong tình hình mới và kế hoạch thực hiện Nghị quyết với xây dựng 09 chương trình thực hiện, bao gồm 07 đề án hoàn thiện về tổ chức và hoạt động của ngành Kỹ thuật Quân đội, 02 dự án quy hoạch hệ thống cơ sở BĐKT và 22 kế hoạch dài hạn thực hiện CTKT.  </p>
+    <p>Thấm nhuần lời dạy của Bác, năm 1958, Cục Quản lý xe TCHC đã phát động phong trào thi đua “Yêu xe như con, quý xăng như máu”, sau được Cục Vận tải tiếp tục duy trì; năm 1985, Cục Quân lương phát động phong trào “Nuôi quân giỏi, quản lý tốt”; năm 1989, Cục Quân y phát động phong trào thi đua “Chiến sĩ quân y làm theo lời Bác”. Ngày 14/3/1995, Bộ trưởng Bộ Quốc phòng đã ban hành Chỉ thị số 214/CT-QP về phát động phong trào thi đua “Ngành Hậu cần quân đội làm theo lời Bác Hồ dạy” trong toàn quân. Cũng ngày 14/3/1995, Bộ trưởng Bộ Quốc phòng đã ban hành Chỉ thị số 216/CT-QP về phát động Cuộc vận động "Quản lý, khai thác vũ khí trang bị kỹ thuật tốt, bền, an toàn, tiết kiệm" thực hiện trong toàn quân. Ngay sau khi ra đời, phong trào đã được toàn quân sôi nổi tham gia hưởng ứng và mang lại hiệu quả to lớn thiết thực. </p>
+    <p>Từ năm 2010 đến nay, tình hình thế giới, khu vực biến động nhanh chóng, khó lường. Trước yêu cầu nhiệm vụ mới, ngành Hậu cần, Kỹ thuật có sự điều chỉnh theo hướng “tinh, gọn, mạnh”, chủ động bám sát sự chỉ đạo của Quân ủy Trung ương, Bộ Quốc phòng, khắc phục khó khăn, nỗ lực vươn lên hoàn thành xuất sắc nhiệm vụ được giao, góp phần xây dựng Quân đội cách mạng, chính quy, tinh nhuệ, từng bước hiện đại và bảo vệ vững chắc Tổ quốc Việt Nam xã hội chủ nghĩa. Nổi bật trên các mặt sau đây: </p>
+    <p>Một là, đã bám sát thực tiễn, dự báo chính xác tình hình, tham mưu, đề xuất với Chính phủ, Quân uỷ Trung ương, Bộ Quốc phòng ban hành nhiều văn bản quy phạm pháp luật liên quan đến công tác hậu cần, kỹ thuật để triển khai thống nhất, chính quy trong toàn quân.  </p>
+    <p>Hai là, Tham mưu với QUTW, Bộ Quốc phòng bảo đảm đủ ngân sách, bổ sung trang thiết bị vật chất hậu cần, TBKT cho SSCĐ; bảo đảm đầy đủ, kịp thời vật chất hậu cần, TBKT cho các nhiệm vụ thường xuyên và đột xuất, trong đó ưu tiên các đơn vị làm nhiệm vụ bảo vệ chủ quyền biên giới, biển đảo, địa bàn trọng điểm; cho các trang bị mới, một số ngành của Quân đội tiến thẳng lên hiện đại và duy trì đủ lượng vật chất hậu cần, TBKT cho dự trữ SSCĐ và dự trữ quốc gia cho quốc phòng theo quy định. Đồng thời, bảo đảm tốt hậu cần, kỹ thuật cho các sự kiện lớn của Đảng, đất nước, Quân đội, như là tham gia giúp dân phòng chống thiên tai, cứu hộ cứu nạn, phòng, chống dịch Covid-19; bảo đảm hậu cần, kỹ thuật đáp ứng yêu cầu các cuộc diễn tập của Bộ.  </p>
+    <p>Ba là, về công tác nghiên cứu khoa học. Tổng cục Hậu cần đẩy mạnh nghiên cứu khoa học, ứng dụng các đề tài, sáng kiến cải tiến đưa vào phục vụ nhiệm vụ huấn luyện, sẵn sàng chiến đấu và đời sống sinh hoạt của bộ đội; nghiên cứu tổng kết lý luận những vấn đề mới đặt ra trong công tác chỉ huy tổ chức bảo đảm hậu cần. Đề xuất, triển khai Dự án xây dựng thí điểm “Bệnh viện thông minh” đồng bộ với đầu tư trang thiết bị y tế tại các bệnh viện quân y. Nghiên cứu, thiết kế mẫu Kho hậu cần toàn quân theo Đề án KH-20; doanh trại tiểu đoàn bộ binh đủ quân; trụ sở làm việc ban chỉ huy quân sự cấp xã; doanh trại cơ quan trung đoàn bộ binh.<br>Tổng cục Kỹ thuật đẩy mạnh nghiên cứu ứng dụng các thành tựu cuộc Cách mạng công nghiệp lần thứ tư vào CTKT để cải tiến, hiện đại hoá TBKT, nâng cao khả năng làm chủ, tự sửa chữa TBKT và năng lực tự sản xuất VTKT trong nước; chú trọng vào chuyển giao công nghệ, cùng nghiên cứu, chế tạo, sản xuất, thử nghiệm TBKT, vật tư.  </p>
+    <p>Bốn là, tập trung xây dựng ngành. hiện kiện toàn tổ chức biên chế ngành Hậu cần, Kỹ thuật theo hướng “tinh, gọn, mạnh”, phù hợp với thực tiễn và yêu cầu nhiệm vụ Chú trọng công tác đào tạo, từng bước đáp ứng yêu cầu về cán bộ, nhân viên hậu cần, kỹ thuật. Có chính sách thu hút nguồn nhân lực chất lượng cao (bác sĩ, kỹ sư...) phục vụ trong lĩnh vực hậu cần, kỹ thuật. Triển khai thực hiện các đề án ngành Hậu cần, Kỹ thuật theo lộ trình và khả năng ngân sách.  </p>
+    <p>ăm là, công tác đối ngoại quốc phòng và hợp tác quốc tế trong lĩnh vực hậu cần, kỹ thuật được củng cố, tăng cường, nhất là với quân đội, nhân dân các nước ASEAN và các nước có quan hệ hữu nghị truyền thống với Việt Nam.  </p>
+
+    <h3>5. Thành lập Tổng cục Hậu cần - Kỹ thuật</h3>
+    <p>Thực hiện Nghị quyết số 05 của Bộ Chính trị, Nghị quyết số 230 của Quân ủy Trung ương về điều chỉnh tổ chức, biên chế Quân đội giai đoạn 2025 - 2030 và những năm tiếp theo và Quyết định số 366 ngày 24/01/2025 của Bộ Quốc phòng, ngày 05/02/2025, Bộ Quốc phòng đã tổ chức Lễ công bố Quyết định sáp nhập Tổng cục Hậu cần, Tổng cục Kỹ thuật và tổ chức lại thành Tổng cục Hậu cần - Kỹ thuật. Tại buổi lễ, ban tổ chức đã công bố Quyết định của Bộ trưởng Bộ Quốc phòng về việc sáp nhập Tổng cục Hậu cần, Tổng cục Kỹ thuật và tổ chức lại thành Tổng cục Hậu cần - Kỹ thuật; công bố Quyết định trao Quân kỳ Quyết thắng tặng Tổng cục Hậu cần - Kỹ thuật.  </p>
+
+
+    <h2>II. KHẨU HIỆU TRUYỀN THỐNG TỔNG CỤC HẬU CẦN - KỸ THUẬT</h2>
+    <p>Tận tụy, dũng cảm, chủ động, sáng tạo, tự lực, tự cường.</p>
+
+    <h2>III. NHỮNG PHẦN THƯỞNG CAO QUÝ CỦA NGÀNH HẬU CẦN - KỸ THUẬT QUÂN ĐỘI</h2>
+    <h3>1. Tổng cục Hậu cần - Kỹ thuật</h3>
+    <p>- 02 Huân chương Sao vàng;</p>
+    <p>- 05 Huân chương Hồ Chí Minh;</p>
+    <p>- 03 Huân chương Quân công hạng Nhất; 01 Huân chương Quân công hạng Nhì;</p>
+    <p>- 01 Huân chương Độc lập hạng Nhất;</p>
+    <p>- 01 Huân chương Lao động hạng Nhất, 01 Huân chương Lao động hạng Nhì của Nhà nước Cộng hòa dân chủ nhân dân Lào;</p>
+    <p>- 02 Huân chương Bảo vệ Tổ quốc hạng Nhất;</p>
+    <p>- 01 Huân chương Bảo vệ Tổ quốc hạng Nhì;</p>
+    <p>- 01 Huân chương Bảo vệ Tổ quốc hạng Ba.</p>
+
+    <h3>2. Các đơn vị trong Ngành</h3>
+    <p>- 03 Huân chương Hồ Chí Minh;</p>
+    <p>- 60 Huân chương Quân công hạng Nhất, Nhì, Ba;</p>
+    <p>- 54 Huân chương Bảo vệ Tổ quốc hạng Nhất, Nhì, Ba;</p>
+    <p>- 07 Huân chương Lao động hạng Nhất, Nhì, Ba;</p>
+    <p>- 912 Huân chương chiến công hạng Nhất, Nhì, Ba;</p>
+    <p>- Toàn ngành có 186 đơn vị được tuyên dương danh hiệu: “Anh hùng LLVTND” và “Anh hùng Lao động”, 157 cá nhân được tuyên dương danh hiệu: “Anh hùng LLVTND”  và “Anh hùng Lao động”./.
+</p>
     </div>
 
-    <div class="timeline">
-        <div class="container left" onclick="openModal(1)">
-            <div class="content"><span class="year">1945 - 1954</span><h2>Kháng chiến chống Pháp</h2><p>Thành lập Tổng cục Cung cấp & Chiến thắng Điện Biên Phủ.</p></div>
-        </div>
-        <div class="container right" onclick="openModal(2)">
-            <div class="content"><span class="year">1954 - 1975</span><h2>Kháng chiến chống Mỹ</h2><p>Thành lập Tổng cục Kỹ thuật & Chiến dịch Hồ Chí Minh lịch sử</p></div>
-        </div>
-        <div class="container left" onclick="openModal(3)">
-            <div class="content"><span class="year">1975 - NAY</span><h2>Xây dựng & Bảo vệ Tổ quốc</h2><p>Hợp nhất & Hiện đại hóa.</p></div>
-        </div>
-    </div>
-
-    <div class="awards-section">
-        <h2 class="awards-title">Phần thưởng cao quý</h2>
-        <div class="award-grid">
-            <div class="award-item">🥇 02 Huân chương Sao vàng</div>
-            <div class="award-item">🎖️ 05 Huân chương Hồ Chí Minh</div>
-            <div class="award-item">⚔️ 03 Huân chương Quân công Hạng Nhất</div>
-            <div class="award-item">🛡️ 02 Huân chương Bảo vệ Tổ quốc Hạng Nhất</div>
-            <div class="award-item">🎖️ Danh hiệu AHLLVTND</div>
-        </div>
-    </div>
-
-    <div id="infoModal" class="modal" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <div id="modalBody" class="modal-inner"></div>
-        </div>
-    </div>
+    <button id="toggleBtn" class="toggle-btn" onclick="toggleContent()">Xem thêm</button>
 
     <script>
-        const store = {
-            1: {
-                t: "Giai đoạn 1945 - 1954",
-                c: `
-                    <div class="data-point"><b>Ngày 22/12/1944:</b> Đội VN Tuyên truyền Giải phóng quân ra đời với <span class="highlight">34 cán bộ</span>, 34 khẩu súng và 20 đồng bạc Đông Dương.</div>
-                    <div class="data-point"><b>Ngày 11/7/1950:</b> Thành lập <b>Tổng cục Cung cấp</b>Đồng chí Trần Đăng Ninh là Chủ nhiệm đầu tiên.</div>
-                    <div class="data-point"><b>Chiến dịch Điện Biên Phủ:</b> Huy động <span class="highlight">261.451 dân công</span>, 20.991 xe đạp thồ, vận chuyển 30.759 tấn lương thực & 1.200 tấn đạn dược.</div>`
-            },
-            2: {
-                t: "Giai đoạn 1954 - 1975",
-                c: `
-                    <div class="data-point"><b>Năm 1959:</b> Mở đường Hồ Chí Minh (Đoàn 559) tạo kỳ tích vận tải chiến lược xuyên Trường Sơn.</div>
-                    <div class="data-point"><b>Ngày 10/9/1974:</b> Thành lập <b>Tổng cục Kỹ thuật</b> nhằm đáp ứng yêu cầu hiện đại hóa vũ khí.</div>
-                    <div class="data-point"><b>Chiến dịch Xuân 1975:</b> Dự trữ <span class="highlight">4.375.000 tấn vật chất</span>, huy động trên 10.000 xe ô tô hành quân thần tốc.</div>`
-            },
-            3: {
-                t: "Giai đoạn 1975 - Nay",
-                c: `
-                    <div class="data-point"><b>Bảo vệ Biên giới:</b> Bảo đảm cho chiến đấu bảo vệ biên giới Tây Nam, Phía Bắc và làm nghĩa vụ quốc tế tại Lào, Campuchia.</div>
-                    <div class="data-point"><b>Từ năm 1986:</b> Đổi mới cơ chế quản lý, đẩy mạnh phong trào "Ngành Hậu cần Quân đội làm theo lời Bác Hồ dạy".</div>
-                    <div class="data-point"><b>Kết quả hiện nay:</b> Tỷ lệ quân số khỏe luôn đạt <span class="highlight">trên 98,5%</span>. Thực hiện hiệu quả Cuộc vận động 50 về quản lý kỹ thuật.</div>
-                    <div class="data-point"><b>Dấu mốc 2024:</b> Hợp nhất thành <b>Tổng cục Hậu cần - Kỹ thuật</b> theo hướng tinh gọn, mạnh, hiện đại.</div>`
-            }
-        };
+        function toggleContent() {
+            const content = document.getElementById("extendedContent");
+            const btn = document.getElementById("toggleBtn");
 
-        function openModal(id) {
-            document.getElementById('modalBody').innerHTML = `<h3>${store[id].t}</h3>${store[id].c}`;
-            document.getElementById('infoModal').style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-        function closeModal() {
-            document.getElementById('infoModal').style.display = 'none';
-            document.body.style.overflow = 'auto';
+            if (content.style.display === "block") {
+                content.style.display = "none";
+                btn.innerText = "Xem thêm";
+                // Tùy chọn: Tự động cuộn màn hình lên đầu trang khi người dùng bấm "Rút gọn"
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            } else {
+                content.style.display = "block";
+                btn.innerText = "Rút gọn";
+            }
         }
     </script>
+
 </body>
 </html>
